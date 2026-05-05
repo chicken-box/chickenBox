@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صندوق الدجاج | Chicken Box</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Oswald:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: #e8210a;
+        --red-dark: #b01a08;
+        --yellow: #ffc107;
+        --dark: #111111;
+        --dark2: #1c1c1c;
+        --dark3: #252525;
+        --card: #1e1e1e;
+        --border: rgba(255, 255, 255, 0.07);
+        --text: #f0f0f0;
+        --muted: #888;
+        --green: #25d366;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        background: var(--dark);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        background: var(--dark);
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+      }
+      .hero-top {
+        background: linear-gradient(
+          135deg,
+          #1a0000 0%,
+          #2d0a00 40%,
+          #1a0000 100%
+        );
+        padding: 3rem 2rem 5rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-top::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 30px,
+          rgba(232, 33, 10, 0.03) 30px,
+          rgba(232, 33, 10, 0.03) 31px
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes pulse-logo {
+        0%,
+        100% {
+          box-shadow: 0 10px 40px rgba(232, 33, 10, 0.5),
+            0 0 0 6px rgba(232, 33, 10, 0.1);
+        }
+        50% {
+          box-shadow: 0 15px 60px rgba(232, 33, 10, 0.7),
+            0 0 0 12px rgba(232, 33, 10, 0.05);
+        }
+      }
+
+      .hero-name-ar {
+        font-family: "Cairo", sans-serif;
+        font-size: clamp(2.2rem, 6vw, 3.5rem);
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+
+      .hero-name-en {
+        font-family: "Oswald", sans-serif;
+        font-size: clamp(1rem, 3vw, 1.4rem);
+        color: var(--yellow);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-badges {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .badge {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        padding: 0.4rem 1rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: linear-gradient(135deg, var(--red), var(--red-dark));
+        color: white;
+        font-family: "Cairo", sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.9rem 2.5rem;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+
+        box-shadow: 0 6px 30px rgba(232, 33, 10, 0.45);
+        transition: 0.3s;
+      }
+
+      .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 40px rgba(232, 33, 10, 0.65);
+      }
+      .logo-box {
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 1.5rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-shadow: 0 0 30px rgba(232, 33, 10, 0.35),
+          0 0 80px rgba(232, 33, 10, 0.2);
+
+        animation: logoPulse 3s infinite ease-in-out;
+        transition: 0.3s;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      /* stripe divider */
+      .stripe-divider {
+        height: 8px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--red) 0px,
+          var(--red) 20px,
+          var(--yellow) 20px,
+          var(--yellow) 40px
+        );
+      }
+
+      /* ===== INFO BAR ===== */
+      .info-bar {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        background: var(--dark2);
+        border-bottom: 1px solid var(--border);
+        flex-wrap: wrap;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 1rem 2rem;
+        border-left: 1px solid var(--border);
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .info-item:last-child {
+        border-left: none;
+      }
+      .info-item .icon {
+        font-size: 1.2rem;
+      }
+      .info-item strong {
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+
+      /* ===== MENU SECTION ===== */
+      .menu-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .menu-header {
+        text-align: center;
+        padding: 3rem 1rem 1.5rem;
+      }
+
+      .menu-header h2 {
+        font-family: "Oswald", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 3px;
+        color: var(--yellow);
+        text-transform: uppercase;
+        margin-bottom: 0.3rem;
+      }
+
+      .menu-header p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* ===== TABS ===== */
+      .tabs-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--dark);
+        border-bottom: 2px solid var(--border);
+        padding: 0 1rem;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+
+      .tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab {
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-family: "Cairo", sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 1rem 1.3rem;
+        cursor: pointer;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .tab.active,
+      .tab:hover {
+        color: var(--red);
+        border-bottom-color: var(--red);
+      }
+
+      /* ===== CATEGORY SECTION ===== */
+      .cat-section {
+        padding: 2rem 0 1rem;
+      }
+
+      .cat-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+      }
+
+      .cat-title h3 {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .cat-title .cat-emoji {
+        font-size: 1.5rem;
+      }
+
+      .cat-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ===== ITEM CARDS ===== */
+      .items-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+      }
+
+      .menu-card {
+        background: var(--card);
+        padding: 1.2rem 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: background 0.2s;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .menu-card:hover {
+        background: #242424;
+      }
+
+      .card-emoji {
+        font-size: 2.2rem;
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .card-name-ar {
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+        margin-bottom: 0.1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .card-name-en {
+        font-family: "Oswald", sans-serif;
+        font-size: 0.78rem;
+        color: var(--muted);
+        letter-spacing: 0.5px;
+        margin-bottom: 0.4rem;
+      }
+
+      .card-desc {
+        font-size: 0.78rem;
+        color: #666;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .card-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+      }
+
+      .cal-badge {
+        background: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.2);
+        color: var(--yellow);
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+
+      .card-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.6rem;
+        flex-shrink: 0;
+      }
+
+      .card-price {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--red);
+        white-space: nowrap;
+      }
+
+      .card-price span {
+        font-size: 0.7rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .add-btn {
+        background: var(--red);
+        border: none;
+        color: white;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        font-size: 1.3rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        box-shadow: 0 3px 12px rgba(232, 33, 10, 0.4);
+        flex-shrink: 0;
+      }
+
+      .add-btn:hover {
+        transform: scale(1.15);
+        background: #ff2d12;
+      }
+
+      .popular-tag {
+        position: absolute;
+        top: 0.6rem;
+        left: 0.6rem;
+        background: var(--yellow);
+        color: #111;
+        font-size: 0.62rem;
+        font-weight: 700;
+        padding: 0.1rem 0.5rem;
+        border-radius: 4px;
+      }
+
+      /* ===== CART BAR ===== */
+      .cart-bar {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(120px);
+        background: #1e1e1e;
+        border: 1px solid rgba(232, 33, 10, 0.3);
+        border-radius: 16px;
+        padding: 0.9rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 100;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        min-width: min(360px, 90vw);
+      }
+
+      .cart-bar.visible {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .cart-icon-wrap {
+        position: relative;
+      }
+
+      .cart-icon {
+        font-size: 1.6rem;
+      }
+
+      .cart-badge {
+        position: absolute;
+        top: -6px;
+        left: -6px;
+        background: var(--red);
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cart-text {
+        flex: 1;
+      }
+      .cart-text .ct-label {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .cart-text .ct-total {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.1rem;
+        color: var(--yellow);
+      }
+
+      .view-cart-btn {
+        background: var(--red);
+        border: none;
+        color: white;
+        font-family: "Cairo", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 0.65rem 1.3rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .view-cart-btn:hover {
+        background: #ff2d12;
+        transform: scale(1.03);
+      }
+
+      /* ===== MODAL ===== */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 200;
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+      }
+
+      .overlay.open {
+        display: flex;
+      }
+
+      .modal {
+        background: #1a1a1a;
+        border: 1px solid var(--border);
+        border-radius: 24px 24px 0 0;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 560px;
+        max-height: 85vh;
+        overflow-y: auto;
+        position: relative;
+        animation: slideUp 0.3s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      @keyframes logoPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 30px rgba(232, 33, 10, 0.35),
+            0 0 80px rgba(232, 33, 10, 0.2);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 50px rgba(232, 33, 10, 0.55),
+            0 0 120px rgba(232, 33, 10, 0.35);
+        }
+      }
+
+      .modal-handle {
+        width: 40px;
+        height: 4px;
+        background: #333;
+        border-radius: 2px;
+        margin: 0 auto 1.5rem;
+      }
+
+      .modal h3 {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        color: var(--yellow);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .modal-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .modal-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+      }
+
+      .mi-emoji {
+        font-size: 1.6rem;
+        flex-shrink: 0;
+      }
+      .mi-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .mi-name {
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+      .mi-price {
+        color: var(--red);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .qty-ctrl {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .qbtn {
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        color: white;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .qbtn:hover {
+        background: var(--red);
+      }
+      .qnum {
+        font-weight: 700;
+        min-width: 18px;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      .modal-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 1rem 0;
+      }
+
+      .modal-total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .modal-total-row .label {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .modal-total-row .value {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.4rem;
+        color: var(--yellow);
+      }
+
+      .name-field {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        padding: 0.8rem 1rem;
+        color: white;
+        font-family: "Cairo", sans-serif;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .name-field:focus {
+        border-color: var(--red);
+      }
+      .name-field::placeholder {
+        color: #555;
+      }
+
+      .wa-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #25d366, #1aad54);
+        border: none;
+        color: white;
+        font-family: "Cairo", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+        padding: 1rem;
+        border-radius: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        transition: all 0.3s;
+        box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
+      }
+
+      .wa-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5);
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        text-align: center;
+        padding: 3rem 1rem 2rem;
+        color: #444;
+        font-size: 0.82rem;
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+      }
+
+      footer span {
+        color: var(--red);
+      }
+
+      /* ===== HIDDEN ===== */
+      .cat-section.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-top">
+        <div class="logo-box">
+          <img src="1.png" alt="Logo" />
+        </div>
+
+        <div class="hero-badges">
+          <div class="badge">🚴 توصيل سريع</div>
+          <div class="badge">🔥 مقلي طازج</div>
+          <div class="badge">⭐ الأعلى تقييماً</div>
+        </div>
+
+        <button
+          class="hero-cta"
+          onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})"
+        >
+          ابدأ طلبك الآن
+        </button>
+      </div>
+    </section>
+
+    <!-- INFO BAR -->
+    <div class="info-bar">
+      <div class="info-item">
+        <span class="icon">🕐</span>
+        <div>
+          <strong>يومياً</strong>
+          <div>12 ظهراً – 2 فجراً</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="icon">📍</span>
+        <div>
+          <strong>الموقع</strong>
+          <div>الرياض</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="icon">🚴</span>
+        <div>
+          <strong>توصيل</strong>
+          <div>30–45 دقيقة</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENU -->
+    <div id="menu">
+      <div class="menu-section">
+        <div class="menu-header">
+          <h2>Menu / القائمة</h2>
+          <p>اختر من تشكيلتنا المميزة · Choose from our selection</p>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs-wrap">
+        <div class="tabs">
+          <button class="tab active" onclick="showCat('all',this)">
+            🍽 الكل / All
+          </button>
+          <button class="tab" onclick="showCat('meals',this)">
+            📦 وجبات / Meals
+          </button>
+          <button class="tab" onclick="showCat('sandwiches',this)">
+            🥪 سندويشات
+          </button>
+          <button class="tab" onclick="showCat('sides',this)">
+            🥗 إضافات / Sides
+          </button>
+          <button class="tab" onclick="showCat('drinks',this)">
+            🥤 مشروبات
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-section">
+        <!-- MEALS -->
+        <div class="cat-section" data-cat="meals">
+          <div class="cat-title">
+            <span class="cat-emoji">📦</span>
+            <h3>Meals / الوجبات</h3>
+            <div class="cat-line"></div>
+          </div>
+          <div class="items-grid">
+            <div class="menu-card" data-cat="meals">
+              <div class="popular-tag">⭐ الأكثر طلباً</div>
+              <div class="card-emoji">🍗</div>
+              <div class="card-info">
+                <div class="card-name-ar">صندوق الدجاج البروستد</div>
+                <div class="card-name-en">Broasted Chicken Box</div>
+                <div class="card-desc">
+                  4 قطع دجاج، بطاطس، صوص ثوم، حمص وخبز · 4 chicken pieces,
+                  fries, garlic sauce, hummus & bread
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 920 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">26 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('صندوق الدجاج البروستد','Broasted Chicken Box',26,'🍗')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🐟</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة فيليه السمك</div>
+                <div class="card-name-en">Fish Fillet</div>
+                <div class="card-desc">
+                  قطعتان من السمك، بطاطس، صوص ثوم، خبز وحمص · 2 fish pieces,
+                  fries, garlic sauce, bread & hummus
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 850 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">32 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة فيليه السمك','Fish Fillet',32,'🐟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🍿</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة ناجتس الدجاج</div>
+                <div class="card-name-en">Chicken Nuggets</div>
+                <div class="card-desc">
+                  8 قطع دجاج، بطاطس، صوص ثوم، حمص وخبز · 8 chicken pieces,
+                  fries, garlic sauce, hummus & bread
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 780 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">24 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة ناجتس الدجاج','Chicken Nuggets',24,'🍿')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🍤</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة الروبيان</div>
+                <div class="card-name-en">Shrimps Meal</div>
+                <div class="card-desc">
+                  10 قطع روبيان، بطاطس، صوص ثوم، حمص وخبز · 10 shrimp pieces,
+                  fries, garlic sauce, hummus & bread
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 720 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">37 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة الروبيان','Shrimps Meal',37,'🍤')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🍗</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة فيليه الدجاج</div>
+                <div class="card-name-en">Chicken Fillet</div>
+                <div class="card-desc">
+                  5 قطع صدر دجاج، بطاطس، صوص ثوم، حمص وخبز · 5 chicken breast
+                  pieces, fries, garlic sauce, hummus & bread
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 860 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">30 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة فيليه الدجاج','Chicken Fillet',30,'🍗')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🍔</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة برجر صندوق الدجاج</div>
+                <div class="card-name-en">Chicken Box Burger Meal</div>
+                <div class="card-desc">
+                  برجر دجاج مع بطاطس ومشروب · Chicken burger with fries and soft
+                  drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 950 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">27 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة برجر صندوق الدجاج','Chicken Box Burger Meal',27,'🍔')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🌯</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة راب الدجاج</div>
+                <div class="card-name-en">Chicken Wrap Meal</div>
+                <div class="card-desc">
+                  راب دجاج مع بطاطس ومشروب · Chicken wrap with fries and soft
+                  drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 820 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">30 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة راب الدجاج','Chicken Wrap Meal',30,'🌯')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🐟</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة راب السمك</div>
+                <div class="card-name-en">Fish Wrap Meal</div>
+                <div class="card-desc">
+                  راب سمك مع بطاطس ومشروب · Fish wrap with fries and soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 800 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">31 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة راب السمك','Fish Wrap Meal',31,'🐟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🐟</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة فيش سوبريم</div>
+                <div class="card-name-en">Fish Supreme Meal</div>
+                <div class="card-desc">
+                  سمك سوبريم مع بطاطس ومشروب · Fish supreme with fries and soft
+                  drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 830 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">31 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة فيش سوبريم','Fish Supreme Meal',31,'🐟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card" data-cat="meals">
+              <div class="card-emoji">🍗</div>
+              <div class="card-info">
+                <div class="card-name-ar">وجبة تشيكن سوبريم</div>
+                <div class="card-name-en">Chicken Supreme Meal</div>
+                <div class="card-desc">
+                  دجاج سوبريم مع بطاطس ومشروب · Supreme chicken with fries and
+                  soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 890 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">30 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('وجبة تشيكن سوبريم','Chicken Supreme Meal',30,'🍗')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SANDWICHES -->
+        <div class="cat-section" data-cat="sandwiches">
+          <div class="cat-title">
+            <span class="cat-emoji">🥪</span>
+            <h3>Sandwiches / السندويشات</h3>
+            <div class="cat-line"></div>
+          </div>
+          <div class="items-grid">
+            <div class="menu-card">
+              <div class="card-emoji">🍔</div>
+              <div class="card-info">
+                <div class="card-name-ar">برجر صندوق الدجاج</div>
+                <div class="card-name-en">Chicken Box Burger</div>
+                <div class="card-desc">
+                  ساندويش برجر مع شريحة دجاج لذيذة · Burger sandwich with
+                  delicious chicken slice
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 580 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">17 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('برجر صندوق الدجاج','Chicken Box Burger',17,'🍔')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍗</div>
+              <div class="card-info">
+                <div class="card-name-ar">تشيكن سوبريم</div>
+                <div class="card-name-en">Chicken Supreme</div>
+                <div class="card-desc">
+                  ساندويش دجاج سوبريم بصوص خاص · Supreme chicken sandwich with
+                  special sauce
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 620 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">21 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('تشيكن سوبريم','Chicken Supreme',21,'🍗')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🌯</div>
+              <div class="card-info">
+                <div class="card-name-ar">راب الدجاج</div>
+                <div class="card-name-en">Chicken Wrap</div>
+                <div class="card-desc">
+                  راب مع قطع دجاج · Wrap sandwich with chicken pieces
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 540 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">21 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('راب الدجاج','Chicken Wrap',21,'🌯')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🐟</div>
+              <div class="card-info">
+                <div class="card-name-ar">راب السمك</div>
+                <div class="card-name-en">Fish Wrap</div>
+                <div class="card-desc">
+                  راب سمك مقلي أو مشوي مع توابل خفيفة · Fried or grilled fish
+                  wrap with light seasoning
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 510 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">22 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('راب السمك','Fish Wrap',22,'🐟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🐟</div>
+              <div class="card-info">
+                <div class="card-name-ar">فيش سوبريم</div>
+                <div class="card-name-en">Fish Supreme</div>
+                <div class="card-desc">
+                  سمك سوبريم طازج بتوابل فاخرة · Fresh supreme fish with premium
+                  spices
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 530 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">22 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('فيش سوبريم','Fish Supreme',22,'🐟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDES -->
+        <div class="cat-section" data-cat="sides">
+          <div class="cat-title">
+            <span class="cat-emoji">🥗</span>
+            <h3>Sides & Extras / الإضافات</h3>
+            <div class="cat-line"></div>
+          </div>
+          <div class="items-grid">
+            <div class="menu-card">
+              <div class="card-emoji">🥗</div>
+              <div class="card-info">
+                <div class="card-name-ar">سلطة الكرنب</div>
+                <div class="card-name-en">Cabbage Salad</div>
+                <div class="card-desc">
+                  سلطة من خضروات طازجة وكرنب · Salad made from fresh vegetables
+                  and cabbage
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 120 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">9 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('سلطة الكرنب','Cabbage Salad',9,'🥗')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍟</div>
+              <div class="card-info">
+                <div class="card-name-ar">بطاطس مقلية - كبير</div>
+                <div class="card-name-en">French Fries - Large</div>
+                <div class="card-desc">
+                  بطاطس مقلية مقرمشة · Crispy fried potato
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 480 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">14 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بطاطس مقلية كبير','French Fries Large',14,'🍟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍟</div>
+              <div class="card-info">
+                <div class="card-name-ar">بطاطس مقلية - صغير</div>
+                <div class="card-name-en">French Fries - Small</div>
+                <div class="card-desc">
+                  بطاطس مقلية مقرمشة · Crispy fried potato
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 280 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">7 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بطاطس مقلية صغير','French Fries Small',7,'🍟')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🫘</div>
+              <div class="card-info">
+                <div class="card-name-ar">حمص - كبير</div>
+                <div class="card-name-en">Chickpeas - Large</div>
+                <div class="card-desc">
+                  حمص بالطحينة وعصير الليمون والثوم · Mashed chickpeas with
+                  tahini, lemon & garlic
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 210 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">9 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('حمص كبير','Chickpeas Large',9,'🫘')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🫘</div>
+              <div class="card-info">
+                <div class="card-name-ar">حمص - صغير</div>
+                <div class="card-name-en">Chickpeas - Small</div>
+                <div class="card-desc">
+                  حمص بالطحينة وعصير الليمون والثوم · Mashed chickpeas with
+                  tahini, lemon & garlic
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 110 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">3 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('حمص صغير','Chickpeas Small',3,'🫘')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🧄</div>
+              <div class="card-info">
+                <div class="card-name-ar">صوص الثوم</div>
+                <div class="card-name-en">Garlic Sauce</div>
+                <div class="card-desc">
+                  صوص بالثوم والملح وعصير الليمون · Sauce with garlic, salt and
+                  lemon juice
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 90 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">3 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('صوص الثوم','Garlic Sauce',3,'🧄')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🌶️</div>
+              <div class="card-info">
+                <div class="card-name-ar">صوص حار</div>
+                <div class="card-name-en">Spicy Sauce</div>
+                <div class="card-desc">
+                  توابل حارة مقدمة بطريقة شهية · Hot and spicy spices served
+                  deliciously
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 45 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">3 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('صوص حار','Spicy Sauce',3,'🌶️')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🫓</div>
+              <div class="card-info">
+                <div class="card-name-ar">خبز</div>
+                <div class="card-name-en">Bread</div>
+                <div class="card-desc">
+                  خبز أبيض مخبوز بالفرن · Oven baked white flour bread
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 150 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">1 <span>ر.س</span></div>
+                <button class="add-btn" onclick="addItem('خبز','Bread',1,'🫓')">
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRINKS -->
+        <div class="cat-section" data-cat="drinks">
+          <div class="cat-title">
+            <span class="cat-emoji">🥤</span>
+            <h3>Drinks / المشروبات</h3>
+            <div class="cat-line"></div>
+          </div>
+          <div class="items-grid">
+            <div class="menu-card">
+              <div class="card-emoji">🥤</div>
+              <div class="card-info">
+                <div class="card-name-ar">بيبسي - كبير</div>
+                <div class="card-name-en">Pepsi - Large</div>
+                <div class="card-desc">
+                  مشروب غازي منعش · Refreshing soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 200 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">12 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بيبسي كبير','Pepsi Large',12,'🥤')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🥤</div>
+              <div class="card-info">
+                <div class="card-name-ar">بيبسي - وسط</div>
+                <div class="card-name-en">Pepsi - Medium</div>
+                <div class="card-desc">
+                  مشروب غازي منعش · Refreshing soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 140 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">8 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بيبسي وسط','Pepsi Medium',8,'🥤')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🥤</div>
+              <div class="card-info">
+                <div class="card-name-ar">بيبسي - صغير</div>
+                <div class="card-name-en">Pepsi - Small</div>
+                <div class="card-desc">
+                  مشروب غازي منعش · Refreshing soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 80 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بيبسي صغير','Pepsi Small',4,'🥤')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🫧</div>
+              <div class="card-info">
+                <div class="card-name-ar">بيبسي دايت - صغير</div>
+                <div class="card-name-en">Pepsi Diet - Small</div>
+                <div class="card-desc">
+                  مشروب غازي بدون سعرات · Zero-calorie carbonated soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 0 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('بيبسي دايت صغير','Pepsi Diet Small',4,'🫧')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍊</div>
+              <div class="card-info">
+                <div class="card-name-ar">ميرندا سيتروس - كبير</div>
+                <div class="card-name-en">Mirinda Citrus - Large</div>
+                <div class="card-desc">
+                  مشروب سيتروس غازي منعش · Refreshing citrus soda
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 190 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">12 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('ميرندا سيتروس كبير','Mirinda Citrus Large',12,'🍊')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍊</div>
+              <div class="card-info">
+                <div class="card-name-ar">ميرندا سيتروس - وسط</div>
+                <div class="card-name-en">Mirinda Citrus - Medium</div>
+                <div class="card-desc">
+                  مشروب سيتروس غازي منعش · Refreshing citrus soda
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 130 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">8 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('ميرندا سيتروس وسط','Mirinda Citrus Medium',8,'🍊')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍊</div>
+              <div class="card-info">
+                <div class="card-name-ar">ميرندا سيتروس - صغير</div>
+                <div class="card-name-en">Mirinda Citrus - Small</div>
+                <div class="card-desc">
+                  مشروب سيتروس غازي منعش · Refreshing citrus soda
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 80 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('ميرندا سيتروس صغير','Mirinda Citrus Small',4,'🍊')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🟠</div>
+              <div class="card-info">
+                <div class="card-name-ar">ميرندا برتقال - صغير</div>
+                <div class="card-name-en">Mirinda Orange - Small</div>
+                <div class="card-desc">
+                  مشروب برتقال غازي منعش · Refreshing orange carbonated drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 80 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('ميرندا برتقال صغير','Mirinda Orange Small',4,'🟠')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍋</div>
+              <div class="card-info">
+                <div class="card-name-ar">سفن أب - كبير</div>
+                <div class="card-name-en">Seven Up - Large</div>
+                <div class="card-desc">
+                  مشروب غازي منعش · Refreshing carbonated soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 185 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">12 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('سفن أب كبير','Seven Up Large',12,'🍋')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍋</div>
+              <div class="card-info">
+                <div class="card-name-ar">سفن أب - صغير</div>
+                <div class="card-name-en">Seven Up - Small</div>
+                <div class="card-desc">
+                  مشروب غازي منعش · Refreshing carbonated soft drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 80 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('سفن أب صغير','Seven Up Small',4,'🍋')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🍋</div>
+              <div class="card-info">
+                <div class="card-name-ar">7UP دايت - صغير</div>
+                <div class="card-name-en">7Up Diet - Small</div>
+                <div class="card-desc">
+                  مشروب ليمون لايم خالي من السكر · Sugar-free lemon-lime soda
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 0 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('7UP دايت صغير','7Up Diet Small',4,'🍋')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">💚</div>
+              <div class="card-info">
+                <div class="card-name-ar">ماونتن ديو - صغير</div>
+                <div class="card-name-en">Dew - Small</div>
+                <div class="card-desc">
+                  Mountain Dew منعش · Mountain Dew refreshing drink
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 90 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('ماونتن ديو صغير','Dew Small',4,'💚')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">🧃</div>
+              <div class="card-info">
+                <div class="card-name-ar">عصير الربيع</div>
+                <div class="card-name-en">Alrabie Juice</div>
+                <div class="card-desc">
+                  عصير برتقال منعش · Refreshing orange juice
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 110 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">4 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('عصير الربيع','Alrabie Juice',4,'🧃')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div class="menu-card">
+              <div class="card-emoji">💧</div>
+              <div class="card-info">
+                <div class="card-name-ar">مياه معدنية</div>
+                <div class="card-name-en">Water</div>
+                <div class="card-desc">
+                  مياه معدنية معبأة · Bottled mineral water
+                </div>
+                <div class="card-meta">
+                  <span class="cal-badge">🔥 0 kcal</span>
+                </div>
+              </div>
+              <div class="card-right">
+                <div class="card-price">2 <span>ر.س</span></div>
+                <button
+                  class="add-btn"
+                  onclick="addItem('مياه معدنية','Water',2,'💧')"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /menu-section -->
+    </div>
+    <!-- /menu -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        🍗 صندوق الدجاج · Chicken Box &nbsp;|&nbsp; جميع الحقوق محفوظة
+        <span>2025</span>
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.75rem">
+        صُنعت بـ <span>❤️</span> لنقدم لك أفضل تجربة طلب
+      </p>
+    </footer>
+
+    <!-- CART BAR -->
+    <div class="cart-bar" id="cartBar">
+      <div class="cart-icon-wrap">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </div>
+      <div class="cart-text">
+        <div class="ct-label">إجمالي طلبك / Total</div>
+        <div class="ct-total" id="cartTotalBar">0 ر.س</div>
+      </div>
+      <button class="view-cart-btn" onclick="openModal()">عرض الطلب ←</button>
+    </div>
+
+    <!-- MODAL -->
+    <div class="overlay" id="overlay" onclick="closeOutside(event)">
+      <div class="modal">
+        <div class="modal-handle"></div>
+        <h3>🛒 Your Order / طلبك</h3>
+        <div class="modal-items" id="modalItems"></div>
+        <div class="modal-divider"></div>
+        <div class="modal-total-row">
+          <span class="label">الإجمالي / Total</span>
+          <span class="value" id="modalTotalVal">0 ر.س</span>
+        </div>
+        <input
+          class="name-field"
+          id="custName"
+          type="text"
+          placeholder="اسمك للطلب / Your name (optional)"
+        />
+        <button class="wa-btn" onclick="sendOrder()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+            />
+          </svg>
+          أرسل الطلب على واتساب · Send via WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let cart = {};
+
+      function addItem(nameAr, nameEn, price, emoji) {
+        const key = nameAr;
+        if (cart[key]) cart[key].qty++;
+        else cart[key] = { nameAr, nameEn, price, emoji, qty: 1 };
+        updateBar();
+        // flash animation
+        const bar = document.getElementById("cartBar");
+        bar.style.transform = "translateX(-50%) translateY(0) scale(1.04)";
+        setTimeout(
+          () =>
+            (bar.style.transform = "translateX(-50%) translateY(0) scale(1)"),
+          150
+        );
+      }
+
+      function updateBar() {
+        const items = Object.values(cart);
+        const count = items.reduce((s, i) => s + i.qty, 0);
+        const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+        document.getElementById("cartBadge").textContent = count;
+        document.getElementById("cartTotalBar").textContent = total + " ر.س";
+        const bar = document.getElementById("cartBar");
+        count > 0
+          ? bar.classList.add("visible")
+          : bar.classList.remove("visible");
+      }
+
+      function openModal() {
+        document.getElementById("overlay").classList.add("open");
+        renderModal();
+      }
+
+      function closeOutside(e) {
+        if (e.target === document.getElementById("overlay"))
+          document.getElementById("overlay").classList.remove("open");
+      }
+
+      function renderModal() {
+        const container = document.getElementById("modalItems");
+        container.innerHTML = "";
+        let total = 0;
+        Object.entries(cart).forEach(([key, item]) => {
+          total += item.price * item.qty;
+          container.innerHTML += `
+      <div class="modal-item">
+        <div class="mi-emoji">${item.emoji}</div>
+        <div class="mi-info">
+          <div class="mi-name">${item.nameAr}</div>
+          <div class="mi-price">${item.price * item.qty} ر.س</div>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qbtn" onclick="changeQty('${key}',-1)">−</button>
+          <span class="qnum">${item.qty}</span>
+          <button class="qbtn" onclick="changeQty('${key}',1)">+</button>
+        </div>
+      </div>`;
+        });
+        document.getElementById("modalTotalVal").textContent = total + " ر.س";
+        if (Object.keys(cart).length === 0)
+          document.getElementById("overlay").classList.remove("open");
+      }
+
+      function changeQty(key, d) {
+        if (!cart[key]) return;
+        cart[key].qty += d;
+        if (cart[key].qty <= 0) delete cart[key];
+        updateBar();
+        renderModal();
+      }
+
+      function sendOrder() {
+        const name = document.getElementById("custName").value.trim();
+        const items = Object.values(cart);
+        if (!items.length) return;
+        let msg = "🍗 *طلب جديد - صندوق الدجاج | Chicken Box*\n\n";
+        if (name) msg += `👤 ${name}\n\n`;
+        msg += "📋 *الطلب / Order:*\n";
+        let total = 0;
+        items.forEach((i) => {
+          msg += `• ${i.emoji} ${i.nameAr} (${i.nameEn}) × ${i.qty} = ${
+            i.price * i.qty
+          } ر.س\n`;
+          total += i.price * i.qty;
+        });
+        msg += `\n💰 *الإجمالي / Total: ${total} ر.س*`;
+        msg += "\n\n📍 يرجى إرسال عنوانك / Please send your address";
+        window.open(
+          `https://wa.me/966549472114?text=${encodeURIComponent(msg)}`,
+          "_blank"
+        );
+      }
+
+      function showCat(cat, btn) {
+        document
+          .querySelectorAll(".tab")
+          .forEach((t) => t.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".cat-section").forEach((s) => {
+          if (cat === "all" || s.dataset.cat === cat)
+            s.classList.remove("hidden");
+          else s.classList.add("hidden");
+        });
+        window.scrollTo({
+          top: document.getElementById("menu").offsetTop - 60,
+          behavior: "smooth",
+        });
+      }
+    </script>
+  </body>
+</html>
