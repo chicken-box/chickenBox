@@ -761,6 +761,76 @@
       .cat-section.hidden {
         display: none;
       }
+
+      /* ===== BRANCH SELECTION ===== */
+      .branch-selection-container {
+        margin-top: 1rem;
+      }
+      .branch-label {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text);
+        margin-bottom: 0.75rem;
+      }
+      .branch-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .branch-card {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(255,255,255,0.04);
+        border: 1.5px solid var(--border);
+        border-radius: 12px;
+        padding: 0.85rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+      }
+      .branch-card:hover {
+        border-color: rgba(232,33,10,0.4);
+        background: rgba(232,33,10,0.05);
+      }
+      .branch-card.active {
+        border-color: var(--red);
+        background: rgba(232,33,10,0.08);
+      }
+      .branch-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+      .branch-info {
+        flex: 1;
+      }
+      .branch-name {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text);
+      }
+      .branch-addr {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 0.1rem;
+      }
+      .branch-check {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--red);
+        color: white;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.2s;
+        flex-shrink: 0;
+      }
+      .branch-card.active .branch-check {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -1782,6 +1852,29 @@
         <div class="modal-handle"></div>
         <h3>🛒 Your Order / طلبك</h3>
         <div class="modal-items" id="modalItems"></div>
+        <!-- اختيار الفرع -->
+        <div class="branch-selection-container">
+          <p class="branch-label">📍 اختر الفرع</p>
+          <div class="branch-cards">
+            <div class="branch-card active" onclick="selectBranch(this, '966549472114')" data-number="966549472114">
+              <div class="branch-icon">🏪</div>
+              <div class="branch-info">
+                <div class="branch-name">فرع طويق</div>
+                <div class="branch-addr">شارع أحمد بن الخطاب</div>
+              </div>
+              <div class="branch-check">✓</div>
+            </div>
+            <div class="branch-card" onclick="selectBranch(this, '966554511337')" data-number="966554511337">
+              <div class="branch-icon">🏪</div>
+              <div class="branch-info">
+                <div class="branch-name">فرع النظيم</div>
+                <div class="branch-addr">شارع المرمر</div>
+              </div>
+              <div class="branch-check">✓</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
         <div class="modal-divider"></div>
         <div class="modal-total-row">
           <span class="label">الإجمالي / Total</span>
@@ -1877,26 +1970,39 @@
         renderModal();
       }
 
+      let selectedBranchNumber = '966549472114'; // الافتراضي: فرع طويق
+
+      function selectBranch(el, number) {
+        document.querySelectorAll('.branch-card').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        selectedBranchNumber = number;
+      }
+
       function sendOrder() {
-        const name = document.getElementById("custName").value.trim();
         const items = Object.values(cart);
-        if (!items.length) return;
-        let msg = "🍗 *طلب جديد - صندوق الدجاج | Chicken Box*\n\n";
-        if (name) msg += `👤 ${name}\n\n`;
-        msg += "📋 *الطلب / Order:*\n";
-        let total = 0;
-        items.forEach((i) => {
-          msg += `• ${i.emoji} ${i.nameAr} (${i.nameEn}) × ${i.qty} = ${
-            i.price * i.qty
-          } ر.س\n`;
-          total += i.price * i.qty;
+        if (items.length === 0) return;
+
+        const custName = document.getElementById('custName').value.trim();
+        const branchEl = document.querySelector('.branch-card.active');
+        const branchName = branchEl ? branchEl.querySelector('.branch-name').textContent : '';
+        const branchAddr = branchEl ? branchEl.querySelector('.branch-addr').textContent : '';
+
+        let message = '🍗 *طلب جديد - صندوق الدجاج*\n';
+        message += '━━━━━━━━━━━━━━━━━\n';
+        if (custName) message += `👤 الاسم: ${custName}\n`;
+        message += `📍 الفرع: ${branchName} - ${branchAddr}\n`;
+        message += '━━━━━━━━━━━━━━━━━\n';
+        message += '🧾 *الطلب:*\n';
+        items.forEach(item => {
+          message += `${item.emoji} ${item.nameAr} × ${item.qty} = ${item.price * item.qty} ر.س\n`;
         });
-        msg += `\n💰 *الإجمالي / Total: ${total} ر.س*`;
-        msg += "\n\n📍 يرجى إرسال عنوانك / Please send your address";
-        window.open(
-          `https://wa.me/966549472114?text=${encodeURIComponent(msg)}`,
-          "_blank"
-        );
+        message += '━━━━━━━━━━━━━━━━━\n';
+        const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+        message += `💰 *الإجمالي: ${total} ر.س*\n`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${selectedBranchNumber}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank');
       }
 
       function showCat(cat, btn) {
